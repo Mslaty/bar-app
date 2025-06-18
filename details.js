@@ -35,31 +35,26 @@ async function cargarDetallesDelBar() {
         const barRef = doc(db, "bars", barId);
         const barSnap = await getDoc(barRef);
 
-        if (barSnap.exists()) {
-            const barData = barSnap.data();
-            
-            // También cargamos las reseñas de este bar
-            const reviewsHtml = await cargarResenas(barId);
+if (barSnap.exists()) {
+    const barData = barSnap.data();
+    
+    // Obtenemos el HTML de la vista previa de reseñas
+    const reviewsPreviewHtml = await cargarResenas(barId);
 
-            // Creamos todo el HTML con los datos del bar
-            const contentHTML = `
-                <div class="@container">
-                    <div class="@[480px]:px-4 @[480px]:py-3">
-                        <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-[#fcf8f8] @[480px]:rounded-lg min-h-[218px]" style='background-image: url("${barData.imagenURL}");'></div>
-                    </div>
-                </div>
-                <h1 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-3 pt-5">${barData.nombre}</h1>
-                <p class="text-[#1b0e0e] text-base font-normal leading-normal pb-3 pt-1 px-4">${barData.descripcion || 'No hay descripción disponible.'}</p>
-                <h3 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Location</h3>
-                <div class="flex px-4 py-3">
-                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg object-cover" style='background-image: url("https://maps.googleapis.com/maps/api/staticmap?center=${barData.nombre},Barcelona&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7Clabel:B%7C${barData.nombre},Barcelona&key=TU_Maps_API_KEY");'></div>
-                </div>
-                <h3 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Reviews</h3>
-                <div class="p-4">${reviewsHtml}</div>
-            `;
-            
-            // Insertamos el HTML en la página
-            document.getElementById('bar-details-content').innerHTML = contentHTML;
+    // Creamos el enlace a la página de todas las reseñas
+    const allReviewsLink = `<div class="px-4 pt-2"><a href="reviews.html?id=${barId}" class="text-[#e92932] font-semibold">Ver todas las ${barData.reviews || 0} reseñas</a></div>`;
+
+    // Creamos todo el HTML con los datos del bar
+    const contentHTML = `
+        {/* ... el resto del HTML para la imagen, nombre, descripción, etc. ... */}
+        
+        <h3 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Reviews</h3>
+        <div class="p-4">${reviewsPreviewHtml}</div>
+        ${barData.reviews > 0 ? allReviewsLink : ''} {/* Mostramos el enlace solo si hay reseñas */}
+    `;
+    
+    // Insertamos el HTML en la página
+    document.getElementById('bar-details-content').innerHTML = contentHTML;
 
         } else {
             document.getElementById('bar-details-content').innerHTML = '<p class="p-4">Este bar no existe.</p>';
