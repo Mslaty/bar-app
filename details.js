@@ -46,10 +46,20 @@ if (barSnap.exists()) {
 
     // Creamos todo el HTML con los datos del bar
     const contentHTML = `
-        {/* ... el resto del HTML para la imagen, nombre, descripción, etc. ... */}
-        
-        <h3 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Reviews</h3>
-        <div class="p-4">${reviewsPreviewHtml}</div>
+                <div class="@container">
+                    <div class="@[480px]:px-4 @[480px]:py-3">
+                        <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-[#fcf8f8] @[480px]:rounded-lg min-h-[218px]" style='background-image: url("${barData.imagenURL}");'></div>
+                    </div>
+                </div>
+                <h1 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-3 pt-5">${barData.nombre}</h1>
+                <p class="text-[#1b0e0e] text-base font-normal leading-normal pb-3 pt-1 px-4">${barData.descripcion || 'No hay descripción disponible.'}</p>
+                <h3 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Location</h3>
+                <div class="flex px-4 py-3">
+                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg object-cover" style='background-image: url("https://maps.googleapis.com/maps/api/staticmap?center=${barData.nombre},Barcelona&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7Clabel:B%7C${barData.nombre},Barcelona&key=TU_Maps_API_KEY");'></div>
+                </div>
+                <h3 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Reviews</h3>
+                <div class="p-4">${reviewsHtml}</div>
+
         ${barData.reviews > 0 ? allReviewsLink : ''} {/* Mostramos el enlace solo si hay reseñas */}
     `;
     
