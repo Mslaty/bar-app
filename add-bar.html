@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
+    <title>Añadir un Bar</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] justify-between group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+        
+        <form id="add-bar-form" class="flex flex-col">
+            <div class="flex items-center bg-[#fcf8f8] p-4 pb-2 justify-between">
+                <a href="index.html" class="text-[#1b0e0e] flex size-12 shrink-0 items-center cursor-pointer" data-icon="X">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+                </a>
+                <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Add your bar</h2>
+            </div>
+            
+            <div class="p-4 space-y-4">
+                <input id="bar-name" placeholder="Bar name" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1b0e0e] focus:outline-0 focus:ring-0 border-none bg-[#f3e7e8] h-14 placeholder:text-[#994d51] p-4 text-base font-normal leading-normal" required />
+                <input id="bar-address" placeholder="Address" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1b0e0e] focus:outline-0 focus:ring-0 border-none bg-[#f3e7e8] h-14 placeholder:text-[#994d51] p-4 text-base font-normal leading-normal" required />
+                <textarea id="bar-description" placeholder="Description" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1b0e0e] focus:outline-0 focus:ring-0 border-none bg-[#f3e7e8] min-h-36 placeholder:text-[#994d51] p-4 text-base font-normal leading-normal" required></textarea>
+                
+                <h3 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] pt-4">Photos</h3>
+                
+                <div id="image-preview-container" class="w-full"></div>
+                
+                <label for="bar-image-upload" class="w-full flex flex-col items-center gap-6 rounded-lg border-2 border-dashed border-[#e7d0d1] px-6 py-14 cursor-pointer">
+                    <div class="flex flex-col items-center gap-2">
+                        <p class="text-[#1b0e0e] text-lg font-bold leading-tight">Add photo</p>
+                        <p class="text-[#994d51] text-sm font-normal text-center">Click here to select an image for your bar.</p>
+                    </div>
+                </label>
+                <input type="file" id="bar-image-upload" accept="image/*" class="hidden">
+            </div>
+
+            <div class="p-4">
+                <button type="submit" id="submit-button" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-[#e92932] text-[#fcf8f8] text-base font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Submit</span>
+                </button>
+            </div>
+        </form>
+
+    </div>
+    
+    <script type="module" src="add-bar.js"></script>
+</body>
+</html>
